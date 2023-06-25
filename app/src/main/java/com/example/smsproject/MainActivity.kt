@@ -48,6 +48,15 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        val receive = ContextCompat.checkSelfPermission(
+            this,
+            android.Manifest.permission.RECEIVE_SMS
+        )
+        if (receive != PackageManager.PERMISSION_GRANTED) {
+            requestWeNeed.add(android.Manifest.permission.RECEIVE_SMS)
+
+        }
+
         var sendSms = ContextCompat.checkSelfPermission(
             this, android.Manifest.permission.SEND_SMS
         )
