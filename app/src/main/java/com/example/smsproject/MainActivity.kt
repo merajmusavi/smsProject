@@ -18,17 +18,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        val myReceiver = MyReceiver()
-//        registerReceiver(myReceiver, IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"))
+      val myReceiver = MyReceiver()
+       registerReceiver(myReceiver, IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"))
 
         binding.button.setOnClickListener {
             if (requestPermission()) {
                 val smsPending = PendingIntent.getBroadcast(this,0,Intent("SMS_P"),0)
                 registerReceiver(SMSReceiver(), IntentFilter("SMS_P"))
+                val getReceiver = PendingIntent.getBroadcast(this,0,Intent("SMS_R"),0)
+                registerReceiver(GetReciver(), IntentFilter("SMS_R"))
 
                 val sms = SmsManager.getDefault()
 
-                sms.sendTextMessage("+989362580601", null, "hello its meraj", smsPending, null)
+                sms.sendTextMessage("+989362580601", null, "hello its meraj", smsPending, getReceiver)
 
             }
         }
