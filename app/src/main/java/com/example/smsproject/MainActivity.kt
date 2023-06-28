@@ -35,6 +35,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        registerReceiver(ReadSms(), IntentFilter("android.provider.Telephony.SMS_RECEIVED"))
+
+
     }
 
     fun requestPermission(): Boolean {
